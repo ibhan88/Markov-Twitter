@@ -74,10 +74,14 @@ def tweet(chains):
 
     status = api.PostUpdate(chains)
 
-    print api.VerifyCredentials()
+    # print api.VerifyCredentials()
     print status.text
 
-    
+    answer = raw_input("Would you like to tweet again? [Y or N] >>> ")
+    if answer == "Y" or answer == "y":
+        return tweet(make_text(make_chains(open_and_read_file(sys.argv[1:]))))
+    else:
+        print "Thanks for tweeting!"
 
 # Get the filenames from the user through a command line prompt, ex:
 # python markov.py green-eggs.txt shakespeare.txt
@@ -92,4 +96,6 @@ chains = make_chains(text)
 chain = make_text(chains)
 
 # Your task is to write a new function tweet, that will take chains as input
-tweet(chain)
+tweet_again = tweet(chain)
+
+tweet_again
