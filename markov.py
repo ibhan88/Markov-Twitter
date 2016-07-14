@@ -45,6 +45,7 @@ def make_text(chains):
 
     key = choice(chains.keys())
     words = [key[0], key[1]]
+    string_140 = " ".join(words)
 
     while key in chains:
         # Keep looping until we have a key that isn't in the chains
@@ -52,12 +53,12 @@ def make_text(chains):
         #
         # Note that for long texts (like a full book), this might mean
         # it would run for a very long time.
-        string_140 = " ".join(words)
+
         word = choice(chains[key])
-        if len(string_140) + len(word) + 1 >= 140:
+        if len(string_140) + len(word) + 1 > 140:
             break
         else:
-            words.append(word)
+            string_140 = string_140 + " " + word
             key = (key[1], word)
 
     return string_140
@@ -96,6 +97,4 @@ chains = make_chains(text)
 chain = make_text(chains)
 
 # Your task is to write a new function tweet, that will take chains as input
-tweet_again = tweet(chain)
-
-tweet_again
+tweet(chain)
